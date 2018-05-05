@@ -19,16 +19,18 @@ protected:
 
 public:
 	std::string getName() noexcept;
+	GPS getGps() const noexcept;
 	void Voyage() { doVoyage(); };
 
 	void moveBoat(Direction direction);
+	Direction directionToMark(const GPS* const marker) const;
 
 protected:
 	Hull const& hull_;
 	Chart const& chart_;
 	std::vector<Propulsion*>& propulsion_;
 
-	unsigned maxSpeed_{ 0 };
+	unsigned maxSpeed_{ 1 };
 	GPS gps_{ GPS(10,4) };
 	bool boatGood_{ true };
 };

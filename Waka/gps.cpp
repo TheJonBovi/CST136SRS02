@@ -7,7 +7,7 @@
 
 #include "gps.h"
 
-GPS::GPS(const int lat, const int lng) noexcept : lat_(lat), lng_(lng)
+GPS::GPS(const int lat, const int lng) noexcept : lat_(lat - 1), lng_(lng - 1)
 {
 }
 

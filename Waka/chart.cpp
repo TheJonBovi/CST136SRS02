@@ -1,23 +1,23 @@
 #include "stdafx.h"
 #include "chart.h"
 #include <cassert>
-
+#include <functional>
 
 Chart::Chart() noexcept :
-	map_
+map_
 {
 	{ Feature::kUnkn, Feature::kUnkn, Feature::kUnkn, Feature::kUnkn, Feature::kUnkn, Feature::kUnkn, Feature::kUnkn, Feature::kUnkn, Feature::kUnkn, Feature::kUnkn },
 	{ Feature::kUnkn, Feature::kDeep, Feature::kDeep, Feature::kDeep, Feature::kDeep, Feature::kDeep, Feature::kDeep, Feature::kDeep, Feature::kDeep, Feature::kUnkn },
-	{ Feature::kUnkn, Feature::kDeep, Feature::kDeep, Feature::kDeep, Feature::kShal, Feature::kShal, Feature::kShal, Feature::kDeep, Feature::kDeep, Feature::kUnkn },
+	{ Feature::kUnkn, Feature::kDeep, Feature::kDeep, Feature::kShal, Feature::kShal, Feature::kShal, Feature::kShal, Feature::kShal, Feature::kDeep, Feature::kUnkn },
 	{ Feature::kUnkn, Feature::kDeep, Feature::kDeep, Feature::kShal, Feature::kShal, Feature::kLand, Feature::kShal, Feature::kShal, Feature::kDeep, Feature::kUnkn },
 	{ Feature::kUnkn, Feature::kDeep, Feature::kDeep, Feature::kShal, Feature::kLand, Feature::kLand, Feature::kLand, Feature::kShal, Feature::kDeep, Feature::kUnkn },
 	{ Feature::kUnkn, Feature::kDeep, Feature::kDeep, Feature::kShal, Feature::kLand, Feature::kLand, Feature::kLand, Feature::kShal, Feature::kDeep, Feature::kUnkn },
 	{ Feature::kUnkn, Feature::kDeep, Feature::kDeep, Feature::kShal, Feature::kShal, Feature::kLand, Feature::kLand, Feature::kShal, Feature::kDeep, Feature::kUnkn },
 	{ Feature::kUnkn, Feature::kDeep, Feature::kDeep, Feature::kShal, Feature::kShal, Feature::kLand, Feature::kShal, Feature::kShal, Feature::kDeep, Feature::kUnkn },
-	{ Feature::kUnkn, Feature::kDeep, Feature::kDeep, Feature::kShal, Feature::kLand, Feature::kLand, Feature::kShal, Feature::kShal, Feature::kDeep, Feature::kUnkn },
-	{ Feature::kUnkn, Feature::kDeep, Feature::kDeep, Feature::kStrt, Feature::kLand, Feature::kLand, Feature::kShal, Feature::kShal, Feature::kDeep, Feature::kUnkn },
-	{ Feature::kUnkn, Feature::kDeep, Feature::kDeep, Feature::kStop, Feature::kLand, Feature::kLand, Feature::kLand, Feature::kShal, Feature::kDeep, Feature::kUnkn },
-	{ Feature::kUnkn, Feature::kDeep, Feature::kDeep, Feature::kShal, Feature::kLand, Feature::kLand, Feature::kLand, Feature::kShal, Feature::kDeep, Feature::kUnkn },
+	{ Feature::kUnkn, Feature::kDeep, Feature::kShal, Feature::kShal, Feature::kLand, Feature::kLand, Feature::kShal, Feature::kShal, Feature::kDeep, Feature::kUnkn },
+	{ Feature::kUnkn, Feature::kDeep, Feature::kShal, Feature::kStrt, Feature::kLand, Feature::kLand, Feature::kShal, Feature::kShal, Feature::kDeep, Feature::kUnkn },
+	{ Feature::kUnkn, Feature::kDeep, Feature::kShal, Feature::kStop, Feature::kLand, Feature::kLand, Feature::kLand, Feature::kShal, Feature::kDeep, Feature::kUnkn },
+	{ Feature::kUnkn, Feature::kDeep, Feature::kShal, Feature::kShal, Feature::kLand, Feature::kLand, Feature::kLand, Feature::kShal, Feature::kDeep, Feature::kUnkn },
 	{ Feature::kUnkn, Feature::kDeep, Feature::kShal, Feature::kShal, Feature::kLand, Feature::kLand, Feature::kShal, Feature::kShal, Feature::kDeep, Feature::kUnkn },
 	{ Feature::kUnkn, Feature::kDeep, Feature::kShal, Feature::kLand, Feature::kLand, Feature::kLand, Feature::kShal, Feature::kShal, Feature::kDeep, Feature::kUnkn },
 	{ Feature::kUnkn, Feature::kDeep, Feature::kShal, Feature::kLand, Feature::kLand, Feature::kLand, Feature::kShal, Feature::kShal, Feature::kDeep, Feature::kUnkn },
@@ -68,4 +68,9 @@ Chart::Feature Chart::getFeature(GPS gps) const noexcept
 
 	auto const result{ getFeature(lat, lng) };
 	return result;
+}
+
+GPS Chart::getMarker(const unsigned marker) const noexcept
+{
+	return pathMarkers_[marker - 1];
 }
